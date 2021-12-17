@@ -23,6 +23,8 @@ public class Hero : MonoBehaviour
 
     public Animator anim;
 
+    public GameObject jumpEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +58,7 @@ public class Hero : MonoBehaviour
             Debug.Log("space bar pressed!");
             jumping = true;
             jumpTime = 0;
+            Instantiate(jumpEffect, new Vector2(transform.position.x, transform.position.y - 1.2f), jumpEffect.transform.rotation);
             anim.SetBool("Jumping", true);
             
 
@@ -96,15 +99,11 @@ public class Hero : MonoBehaviour
         //now layerMask is every layer BUT 8.
         layerMask = ~layerMask;
 
-        
-
         //visualize the ray
-        Debug.DrawRay(transform.position, new Vector3(0, -1*(distanceToGround + 0.1f), 0), Color.green, 2, false);
+        Debug.DrawRay(transform.position, new Vector3(0, -1 * (distanceToGround + 0.1f), 0), Color.green, 2, false);
 
         //See if we intersect anything that is immedietely below us (that specifically ISN'T us).
-        return Physics2D.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f , layerMask);
-
-        
+        return Physics2D.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f, layerMask);
     }
- 
+
 }

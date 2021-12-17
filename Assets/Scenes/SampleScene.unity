@@ -373,6 +373,9 @@ MonoBehaviour:
     type: 3}
   hero: {fileID: 1454799396}
   currentBuilding: {fileID: 8134315771984071145}
+  satellite: {fileID: 0}
+  box: {fileID: 0}
+  despawner: {fileID: 0}
   currentBuildingSize: {x: 0, y: 0, z: 0}
 --- !u!212 &1008760567
 SpriteRenderer:
@@ -535,6 +538,9 @@ MonoBehaviour:
     type: 3}
   hero: {fileID: 1454799396}
   currentBuilding: {fileID: 3667555399917383042}
+  satellite: {fileID: 0}
+  box: {fileID: 0}
+  despawner: {fileID: 0}
   currentBuildingSize: {x: 0, y: 0, z: 0}
 --- !u!212 &1096085184
 SpriteRenderer:
@@ -787,6 +793,10 @@ MonoBehaviour:
     type: 3}
   hero: {fileID: 1454799396}
   currentBuilding: {fileID: 2027241996}
+  satellite: {fileID: 4194890604870284937, guid: 1bbd2f3f1136bd942a4ea26f1c41f782,
+    type: 3}
+  box: {fileID: 605468688335146919, guid: baba2467dcc2f7b4f8e363cc43f42e5d, type: 3}
+  despawner: {fileID: 1230881413}
   currentBuildingSize: {x: 0, y: 0, z: 0}
 --- !u!212 &1332327416
 SpriteRenderer:
@@ -1004,6 +1014,8 @@ MonoBehaviour:
   jumping: 0
   jumpAmount: 0
   anim: {fileID: 1454799402}
+  jumpEffect: {fileID: 1039532542152516940, guid: 9bdc97048c64263438e5aa7b79544ea8,
+    type: 3}
 --- !u!95 &1454799402
 Animator:
   serializedVersion: 3
