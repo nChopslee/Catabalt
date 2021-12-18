@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        buildingGap = 2f;
+        buildingGap = .1f;
         SpawnBuilding();
     }
 
@@ -49,21 +49,48 @@ public class Spawner : MonoBehaviour
         //have it be relative to the previous building
         float currentBuildingY = currentBuilding.transform.position.y;
         //Pick a random x value to give randomness to the width of buildings
-        float buildingXScale = Random.RandomRange(3f, 20f);
+        float buildingXScale = Random.RandomRange(.6f, 1.5f);
 
 
         //futz with it a little
         float adjustment = Random.RandomRange(-2.5f, 2.5f);
-        buildingGap = Random.RandomRange(2f, 4f);
+        buildingGap = Random.RandomRange(-10f, -8f);
 
         //TODO: make sure building doesn't fall off the side of the screen.
         float newBuildingY = currentBuildingY + adjustment;
 
 
         Vector3 spawnPosition = new Vector3(this.transform.position.x, newBuildingY, this.transform.position.z);
-        currentBuilding = Instantiate(building, spawnPosition, Quaternion.identity);
+
+        if(buildingXScale >= .6 && buildingXScale <= 1.5)
+        {
+            currentBuilding = Instantiate(Resources.Load<GameObject>("building_1"), spawnPosition, Quaternion.identity);
+        }
+        else if(buildingXScale > .8 && buildingXScale <= 1)
+        {
+            currentBuilding = Instantiate(Resources.Load<GameObject>("building_2"), spawnPosition, Quaternion.identity);
+        }
+        else if (buildingXScale > 1 && buildingXScale <= 1.2)
+        {
+            currentBuilding = Instantiate(Resources.Load<GameObject>("building_3"), spawnPosition, Quaternion.identity);
+        }
+        else if (buildingXScale > 1.2 && buildingXScale <= 1.5)
+        {
+            currentBuilding = Instantiate(Resources.Load<GameObject>("building_4"), spawnPosition, Quaternion.identity);
+        }
+        else
+        {
+
+        }
+
+
+
+
+
+
+
         //Passes in the new building width calculated earlier
-        currentBuilding.transform.localScale = new Vector2(buildingXScale, currentBuilding.transform.localScale.y);
+        currentBuilding.transform.localScale = new Vector2(currentBuilding.transform.localScale.x, currentBuilding.transform.localScale.y);
         SpriteRenderer renderer = currentBuilding.GetComponent<SpriteRenderer>();
         currentBuildingSize = renderer.bounds.size;
         //We get a random number between 0 and 3 and if that number is 2 we spawn a box
