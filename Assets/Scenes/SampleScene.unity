@@ -1869,6 +1869,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_5
       objectReference: {fileID: 0}
+    - target: {fileID: 6788861735345172995, guid: 32ac9a5b51eafe1419a801f98b75cff8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6788861735345173022, guid: 32ac9a5b51eafe1419a801f98b75cff8,
         type: 3}
       propertyPath: despawner
