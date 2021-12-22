@@ -58,7 +58,7 @@ public class Hero : MonoBehaviour
             Debug.Log("space bar pressed!");
             jumping = true;
             jumpTime = 0;
-            Instantiate(jumpEffect, new Vector2(transform.position.x, transform.position.y - 1.2f), jumpEffect.transform.rotation);
+            Instantiate(jumpEffect, new Vector2(transform.position.x, transform.position.y - 0.5f), jumpEffect.transform.rotation);
             anim.SetBool("Jumping", true);
             
 
