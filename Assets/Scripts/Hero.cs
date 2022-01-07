@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
+    public GameManager manager;
+    public int jumpCount;
     //the max amount of time you can hold the jump button
     public float buttonTime;
 
@@ -12,6 +14,9 @@ public class Hero : MonoBehaviour
 
     //whether or not they are jumping.
     public bool jumping;
+
+    //whether or not they are falling.
+    public bool falling;
 
     //how high they can jump
     public float jumpAmount;
@@ -32,7 +37,9 @@ public class Hero : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         buttonTime = 0.3f;
         jumpAmount = 5f;
+        jumpCount = 0;
         jumping = false;
+        falling = false;
         jumpTime = 0;
         distanceToGround = GetComponent<Collider2D>().bounds.size.y;
     }
@@ -44,13 +51,16 @@ public class Hero : MonoBehaviour
 
         if (IsGrounded())
         {
-            
+
             anim.SetBool("Grounded", true);
             anim.SetBool("Jumping", false);
             anim.SetBool("Falling", false);
             //jumping = false;
 
-        }
+        } //else if(!IsGrounded() && !jumping){
+          //anim.SetBool("Falling", true);
+
+        //}
 
         //Let the player jump but only if they are grounded
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
@@ -58,9 +68,11 @@ public class Hero : MonoBehaviour
             Debug.Log("space bar pressed!");
             jumping = true;
             jumpTime = 0;
+            jumpCount++;
+            manager.speed += 0.5f;
             Instantiate(jumpEffect, new Vector2(transform.position.x, transform.position.y - 1.2f), jumpEffect.transform.rotation);
-            anim.SetBool("Jumping", true);
-            
+
+
 
 
             //float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rigidBody.gravityScale));
@@ -72,18 +84,19 @@ public class Hero : MonoBehaviour
         //keep the timer going
         if (jumping)
         {
-            
+
             anim.SetBool("Grounded", false);
             anim.SetBool("Jumping", true);
             //change the velocity directly.
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpAmount);
             jumpTime += Time.deltaTime;
             
+
         }
 
         //If they let go of the jump button, or if they jump for as
         //long as they are allowed to.
-        if(Input.GetKeyUp(KeyCode.Space) || jumpTime > buttonTime)
+        if (Input.GetKeyUp(KeyCode.Space) || jumpTime > buttonTime)
         {
             jumping = false;
             anim.SetBool("Jumping", false);
@@ -106,4 +119,16 @@ public class Hero : MonoBehaviour
         return Physics2D.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f, layerMask);
     }
 
+    private void OnTriggerEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.tag == "FallZone")
+        {
+
+            anim.SetBool("Falling", true);
+            falling = true;
+        }
+    }
 }
+
+
