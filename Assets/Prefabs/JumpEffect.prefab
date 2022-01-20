@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1039532542152516931}
   - component: {fileID: 1039532542152516930}
   - component: {fileID: 1039532542152516941}
-  - component: {fileID: 1039532542152516928}
   m_Layer: 0
   m_Name: JumpEffect
   m_TagString: Untagged
@@ -736,7 +735,7 @@ ParticleSystem:
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
-    m_Texture: {fileID: 2800000, guid: 1a5398bd8059468419d47300d81d1a08, type: 3}
+    m_Texture: {fileID: 2800000, guid: 372a72b355357d54286da0630a5e5067, type: 3}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
     m_TextureUVChannel: 0
@@ -4830,7 +4829,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 7e43b83395af15e4e81fb09abef035a0, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4876,15 +4874,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1039532542152516928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1039532542152516940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f368391c43033c24997094e4daf7667a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
