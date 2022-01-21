@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{4abd7da0-5fbb-4197-8ba2-31fbc40f3593}">
+		<property name="assetPath">
+			<value>Cat steps (Freeze) [2022-01-07 041511].wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.5</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{790122d7-d374-4735-aa79-8700d697f61d}</destination>
+		</relationship>
+	</object>
+</objects>
