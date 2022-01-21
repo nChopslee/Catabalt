@@ -5,6 +5,7 @@ using UnityEngine;
 public class Hero : MonoBehaviour
 {
     public GameManager manager;
+    public MusicController footsteps;
     public int jumpCount;
     //the max amount of time you can hold the jump button
     public float buttonTime;
@@ -119,14 +120,24 @@ public class Hero : MonoBehaviour
         return Physics2D.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f, layerMask);
     }
 
-    private void OnTriggerEnter2D(Collision2D collision)
+    void StepSound()
+    {
+        footsteps.Feet();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "FallZone")
+        if (collision.gameObject.layer == 6)
         {
 
             anim.SetBool("Falling", true);
             falling = true;
+        }
+
+        if (collision.gameObject.CompareTag("Crate"))
+        {
+            manager.speed *= .8f;
         }
     }
 }
