@@ -27,9 +27,7 @@ public class Spawner : MonoBehaviour
     {
 
         //right most point of building
-        float rightMostPoint = currentBuilding.transform.position.x + currentBuildingSize.x + buildingGap;
-
-        if (rightMostPoint < this.transform.position.x)
+        if (currentBuilding.transform.position.x <= this.transform.position.x)
         {
             //Create a new building
             SpawnBuilding();
@@ -54,13 +52,17 @@ public class Spawner : MonoBehaviour
 
         //futz with it a little
         float adjustment = Random.RandomRange(-2.5f, 2.5f);
-        buildingGap = Random.RandomRange(-10f, -8f);
+        buildingGap = Random.RandomRange(2f, 7f);
 
         //TODO: make sure building doesn't fall off the side of the screen.
         float newBuildingY = currentBuildingY + adjustment;
 
-
-        Vector3 spawnPosition = new Vector3(this.transform.position.x, newBuildingY, this.transform.position.z);
+        float rightMostPoint = currentBuilding.transform.position.x + currentBuildingSize.x/2 - buildingGap;
+        Debug.Log(currentBuilding.transform.position.x);
+        Debug.Log(currentBuildingSize.x);
+        Debug.Log(buildingGap);
+        Debug.Log(rightMostPoint +" "+this.transform.position.x);
+        Vector3 spawnPosition = new Vector3(this.transform.position.x + rightMostPoint, newBuildingY, this.transform.position.z);
 
         if(buildingXScale >= .6 && buildingXScale <= 1.5)
         {

@@ -42,6 +42,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Buildings
+    uniqueID: 3357832337
+    locked: 0
+  - name: Effects
+    uniqueID: 2489677533
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

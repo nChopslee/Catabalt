@@ -57,7 +57,7 @@ public class RandomSpawner : MonoBehaviour
         buildingList = buildingListArray.ToList();
         GameObject buildingToSpawn = buildingList[Random.RandomRange(0, buildingList.Count)];
         currentBuilding = Instantiate(buildingToSpawn, spawnPosition, Quaternion.identity) as GameObject;
-
+        currentBuilding.layer = 6;
         SpriteRenderer renderer = currentBuilding.GetComponent<SpriteRenderer>();
         currentBuildingSize = renderer.bounds.size;
     }

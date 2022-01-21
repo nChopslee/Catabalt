@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7453453259233566966}
   - component: {fileID: 6010735126448543852}
   - component: {fileID: 6010735126448543859}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Background Building 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -937134959
+  m_SortingLayer: 2
   m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: c96a78144d7704651b6ceb48f27369d5, type: 3}
   m_Color: {r: 0.378471, g: 0.5092084, b: 0.5943396, a: 1}
