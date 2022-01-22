@@ -17,7 +17,7 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position -= new Vector3(GameManager.Instance.speed * Time.deltaTime, 0, 0);
+        transform.position -= new Vector3(GameManager.instance.speed * Time.deltaTime, 0, 0);
         //rigidBody.AddForce(transform.right * -1 * GameManager.Instance.speed);
 
         if(transform.position.x < despawner.transform.position.x)

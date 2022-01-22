@@ -9,15 +9,23 @@ public class Spawner : MonoBehaviour
     public GameObject building;
     public GameObject hero;
     public GameObject currentBuilding;
+    public GameObject lastBuilding;
     public GameObject satellite;
     public GameObject box;
     public GameObject despawner;
     public Vector3 currentBuildingSize;
+    public Vector3 lastBuildingSize;
 
+    string[] differentBuildings = new string[5];
 
     // Start is called before the first frame update
     void Start()
     {
+        differentBuildings[0] = "building_1";
+        differentBuildings[1] = "building_2";
+        differentBuildings[2] = "building_3";
+        differentBuildings[3] = "building_4";
+        differentBuildings[4] = "building_5";
         buildingGap = .1f;
         SpawnBuilding();
     }
@@ -26,8 +34,11 @@ public class Spawner : MonoBehaviour
     void Update()
     {
 
+        BoxCollider2D currentBuildingCol = currentBuilding.GetComponent<BoxCollider2D>();
         //right most point of building
-        if (currentBuilding.transform.position.x <= this.transform.position.x)
+        float rightMostPoint = currentBuilding.transform.position.x + currentBuildingCol.bounds.extents.x;
+
+        if (rightMostPoint < this.transform.position.x)
         {
             //Create a new building
             SpawnBuilding();
@@ -51,58 +62,40 @@ public class Spawner : MonoBehaviour
 
 
         //futz with it a little
-        float adjustment = Random.RandomRange(-2.5f, 2.5f);
-        buildingGap = Random.RandomRange(2f, 7f);
+        float adjustment = Random.RandomRange(-.5f, .5f);
+        buildingGap = Random.RandomRange(4f, 6.5f);
 
         //TODO: make sure building doesn't fall off the side of the screen.
         float newBuildingY = currentBuildingY + adjustment;
 
-        float rightMostPoint = currentBuilding.transform.position.x + currentBuildingSize.x/2 - buildingGap;
-        Debug.Log(currentBuilding.transform.position.x);
-        Debug.Log(currentBuildingSize.x);
-        Debug.Log(buildingGap);
-        Debug.Log(rightMostPoint +" "+this.transform.position.x);
-        Vector3 spawnPosition = new Vector3(this.transform.position.x + rightMostPoint, newBuildingY, this.transform.position.z);
+        Vector3 spawnPosition = new Vector3(0, newBuildingY, this.transform.position.z);
+        //Vector3 spawnPosition = new Vector3(this.transform.position.x, newBuildingY, this.transform.position.z);
 
-        if(buildingXScale >= .6 && buildingXScale <= 1.5)
-        {
-            currentBuilding = Instantiate(Resources.Load<GameObject>("building_1"), spawnPosition, Quaternion.identity);
-        }
-        else if(buildingXScale > .8 && buildingXScale <= 1)
-        {
-            currentBuilding = Instantiate(Resources.Load<GameObject>("building_2"), spawnPosition, Quaternion.identity);
-        }
-        else if (buildingXScale > 1 && buildingXScale <= 1.2)
-        {
-            currentBuilding = Instantiate(Resources.Load<GameObject>("building_3"), spawnPosition, Quaternion.identity);
-        }
-        else if (buildingXScale > 1.2 && buildingXScale <= 1.5)
-        {
-            currentBuilding = Instantiate(Resources.Load<GameObject>("building_4"), spawnPosition, Quaternion.identity);
-        }
-        else
-        {
+        BoxCollider2D lastBuildingCol = lastBuilding.GetComponent<BoxCollider2D>();
+        lastBuildingSize = lastBuildingCol.size;
 
-        }
+        //We get a random index of our building array to use later
+        int randomIndex = Random.Range(0, differentBuildings.Length);
 
-
-
-
-
-
+        //We spawn a building based on our randomIndex and then we get it's collider to move it specifically where we want it
+        currentBuilding = Instantiate(Resources.Load<GameObject>(differentBuildings[randomIndex]), spawnPosition, Quaternion.identity);
+        BoxCollider2D currentBuildingCol = currentBuilding.GetComponent<BoxCollider2D>();
+        currentBuilding.transform.position = new Vector3(((lastBuilding.transform.position.x + lastBuildingCol.bounds.extents.x) + currentBuildingCol.bounds.extents.x) + buildingGap, currentBuilding.transform.position.y, currentBuilding.transform.position.z);
 
         //Passes in the new building width calculated earlier
-        currentBuilding.transform.localScale = new Vector2(currentBuilding.transform.localScale.x, currentBuilding.transform.localScale.y);
+        //currentBuilding.transform.localScale = new Vector2(currentBuilding.transform.localScale.x, currentBuilding.transform.localScale.y);
         SpriteRenderer renderer = currentBuilding.GetComponent<SpriteRenderer>();
-        currentBuildingSize = renderer.bounds.size;
+        //Attempting to use the box collider to get an accurate size
+
         //We get a random number between 0 and 3 and if that number is 2 we spawn a box
         int boxChance = Random.Range(0, 3);
         if(boxChance == 2)
         {
             SpawnBox(renderer, newBuildingY);
         }
-        /*Vector2 boxPosition = new Vector2( Random.Range(renderer.bounds.min.x ,renderer.bounds.max.x - 1f), newBuildingY + .5f);
-        Instantiate(box, boxPosition, Quaternion.identity);*/
+
+        //The building we were creating becomes the last building for the next iteration
+        lastBuilding = currentBuilding;
     }
 
     void SpawnSatellite()
@@ -113,8 +106,6 @@ public class Spawner : MonoBehaviour
     }
 
     //Spawns a box on top of the currentbuilding with a random x taken from the buildings spriterenderer bounds
-    //Right now the box just acts as an object that needs to be jumped over but when speed is added it will need to be changed
-    //to lower the players speed then despawn if the player hits it.
     void SpawnBox(SpriteRenderer sRenderer, float buildingY)
     {
         Vector2 boxPosition = new Vector2(Random.Range(sRenderer.bounds.min.x, sRenderer.bounds.max.x - 1f), buildingY + .5f);
