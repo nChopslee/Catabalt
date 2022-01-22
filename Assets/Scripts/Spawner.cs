@@ -62,8 +62,8 @@ public class Spawner : MonoBehaviour
 
 
         //futz with it a little
-        float adjustment = Random.RandomRange(1.5f, 2.5f);
-        buildingGap = Random.RandomRange(2f, 3f);
+        float adjustment = Random.RandomRange(-.5f, .5f);
+        buildingGap = Random.RandomRange(4f, 6.5f);
 
         //TODO: make sure building doesn't fall off the side of the screen.
         float newBuildingY = currentBuildingY + adjustment;
